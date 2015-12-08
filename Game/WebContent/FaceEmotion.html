@@ -1,0 +1,120 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport"
+	content="width=device-width,height=device-height,inital-scale=1.0,maximum-scale=1.0,user-scalable=no">
+<title>表情识别</title>
+<link rel="stylesheet"
+	href="http://cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+<script src="http://cdn.bootcss.com/jquery/1.11.2/jquery.min.js"></script>
+<script src="http://cdn.bootcss.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script src="js/lrz.mobile.min.js"></script>
+</head>
+<body>
+	<div style="margin: 5px"></div>
+
+	<div>
+		<img id="pic" src="" width="100%">
+	</div>
+	<div style="margin: 5px"></div>
+	
+	<div id="recongnize" style="margin: 5px auto 0 40%;display:none;">
+		<i class="fa fa-spinner fa-spin"></i>正在识别...
+	</div>
+
+	<div id="result"></div>
+	
+	<div style="margin: 10px 0 60px 0"></div>
+
+	<nav class="navbar navbar-default navbar-fixed-bottom">
+		<div class="container"
+			style="padding-right: 0; padding-left: 0; width: 100%;">
+			<!-- Button trigger modal -->
+			<input id="upload" type="file" style="display: none"> <input
+				style="width: 100%; border-radius: 1px; line-height: 1.5;"
+				type="button" class="btn btn-primary btn-lg"
+				onclick="$('input[id=upload]').click();" value="添加一张图片">
+		</div>
+	</nav>
+
+</body>
+<script>
+	var reader = new FileReader();
+	var picture = '';
+	$('input#upload').change(
+			function() {
+				$("div#result").empty();
+				if (this.files && this.files[0]) {
+					// reader.readAsDataURL(this.files[0]);
+					// }
+
+					// 也可以传入图片路径：lrz('../demo.jpg', ...
+					lrz(this.files[0], {
+
+						// 压缩率
+						// quality: 0.2,
+						width : 500,
+
+						// 压缩开始
+						before : function() {
+							$("img#pic").attr("src", "images/wait.gif");
+							console.log('压缩开始');
+						},
+						// 压缩失败
+						fail : function(err) {
+							console.error(err);
+						},
+						// 压缩结束（不论成功失败）
+						always : function() {
+							console.log('压缩结束');
+						},
+						// 压缩成功
+						done : function(results) {
+							// 你需要的数据都在这里，可以以字符串的形式传送base64给服务端转存为图片。
+							console.log(results);
+							$("img#pic").attr('src', results.base64).addClass(
+									"img-thumbnail");
+							$("div#recongnize").show();
+							picture = results.base64;
+							$.ajax({
+								type : 'POST',
+								url : "ReceivePicture.do",
+								data : {
+									"picture" : picture
+								},
+								success : function(msg) {
+									$("div#recongnize").hide();
+									var obj = JSON.parse(msg);
+									if(obj.length==0) {
+										alert("未找到人脸请换张照片");
+									}
+									else{
+										var content = "";
+										for(var i=0;i<obj.length;i++) {
+											var result = '<table width="100%">距离屏幕左侧'+obj[i].faceRectangle.left+'像素处发现一张人脸';
+											result = result+'<tr><td>愤怒</td><td>'+obj[i].scores.anger.toFixed(5)+'</td>';
+											result = result+'<tr><td>高兴</td><td>'+obj[i].scores.happiness.toFixed(5)+'</td>';
+											result = result+'<tr><td>惊讶</td><td>'+obj[i].scores.surprise.toFixed(5)+'</td>';
+											result = result+'<tr><td>伤心</td><td>'+obj[i].scores.sadness.toFixed(5)+'</td>';
+											result = result+'<tr><td>害怕</td><td>'+obj[i].scores.fear.toFixed(5)+'</td>';
+											result = result+'<tr><td>冷静</td><td>'+obj[i].scores.neutral.toFixed(5)+'</td>';
+											result = result+'<tr><td>蔑视</td><td>'+obj[i].scores.contempt.toFixed(5)+'</td>';
+											result = result+'<tr><td>厌恶</td><td>'+obj[i].scores.disgust.toFixed(5)+'</td>';
+											result = result+'</table>';
+											result = result+'<div style="margin: 5px"></div>';
+											content = content+result;
+										}
+										$("div#result").append(content);
+									}
+									
+								}
+							});
+						}
+					});
+				}
+			});
+</script>
+</html>

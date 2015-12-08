@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+ "-//Hibernate/Hibernate Mapping DTD//EN"
+ "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="nju.iip.dto.UserLocation" table="weixin_location">
+		<meta attribute="class-description">
+			This class contains the nju.iip.dto.UserLocation detail.
+		</meta>
+		<id name="openId" type="string" column="openId">
+			<generator class="assigned" />
+		</id>
+		<property name="Latitude" column="Latitude" type="string" />
+		<property name="Longitude" column="Longitude" type="string" />
+		<property name="time" column="time" type="string" />
+	</class>
+</hibernate-mapping>

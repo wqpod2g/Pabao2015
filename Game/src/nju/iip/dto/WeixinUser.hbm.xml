@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+ "-//Hibernate/Hibernate Mapping DTD//EN"
+ "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="nju.iip.dto.WeixinUser" table="weixin_userinfo">
+		<meta attribute="class-description">
+			This class contains the nju.iip.dto.WeixinUser detail.
+		</meta>
+		<id name="openId" type="string" column="openId">
+			<generator class="assigned" />
+		</id>
+		<property name="registdate" column="registdate" type="string" />
+		<property name="nickname" column="nickname" type="string" />
+		<property name="country" column="country" type="string" />
+		<property name="province" column="province" type="string" />
+		<property name="city" column="city" type="string" />
+		<property name="headImgUrl" column="headImgUrl" type="string" />
+		<property name="sex" column="sex" type="int" />
+		<property name="phone" column="phone" type="string" />
+		<property name="name" column="name" type="string" />
+	</class>
+</hibernate-mapping>
