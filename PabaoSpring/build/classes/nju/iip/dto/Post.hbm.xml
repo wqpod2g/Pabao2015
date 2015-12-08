@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+ "-//Hibernate/Hibernate Mapping DTD//EN"
+ "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="nju.iip.dto.Post" table="weixin_post">
+		<meta attribute="class-description">
+			This class contains the nju.iip.dto.Post detail.
+		</meta>
+		<id name="id" type="int" column="id">
+			<generator class="increment" />
+		</id>
+		<property name="title" column="title" type="string" />
+		<property name="content" column="content" type="string" />
+		<property name="author" column="author" type="string" />
+		<property name="openId" column="openId" type="string" />
+		<property name="headImgUrl" column="headImgUrl" type="string" />
+		<property name="postTime" column="postTime" type="string" />
+		<property name="reply" column="reply" type="int" />
+		<property name="love" column="love" type="int" />
+		<property name="pictureUrl" type="text">
+		<column name="pictureUrl" length = "16777216" />
+		</property>
+		<property name="isUp" column="isUp" type="int" />
+	</class>
+</hibernate-mapping>

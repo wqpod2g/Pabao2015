@@ -16,10 +16,10 @@
       jdbc:mysql://rdsvm4pkvrd6ep4fse3n.mysql.rds.aliyuncs.com:3306/rjk08t3cj70wnkw6
    </property>
    <property name="hibernate.connection.username">
-      rjk08t3cj70wnkw6
+      your username
    </property>
    <property name="hibernate.connection.password">
-      iipconfig
+      your password
    </property>
    
 <property name="c3p0.min_size">10</property> <!--在连接池中可用数据库连接的最小数目-->

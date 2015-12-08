@@ -1,0 +1,88 @@
+{
+    "button": [
+        {
+            "name": "我的社区", 
+            "sub_button": [
+            
+             {
+                    "type": "view", 
+                    "name": "微社区", 
+                    "url": "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx00c60e99a8216c90&redirect_uri=http://weixin.falbert.com/PabaoSpring/post_list&response_type=code&scope=snsapi_userinfo&state=bbs#wechat_redirect"
+              },
+              
+              {
+                    "type": "view", 
+                    "name": "附近的人", 
+                    "url": "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx00c60e99a8216c90&redirect_uri=http://weixin.falbert.com/PabaoSpring/nearby_show&response_type=code&scope=snsapi_userinfo&state=nearby#wechat_redirect"
+              },
+              
+              {
+                    "type": "click", 
+                    "name": "历史文章", 
+                    "key": "menu_1_3"
+              }
+            
+            
+            ]
+            
+        }, 
+        {
+            "name": "我的检测", 
+             "sub_button": [
+            
+             {
+                    "type": "view", 
+                    "name": "量表评测", 
+                    "url": "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx00c60e99a8216c90&redirect_uri=http://weixin.falbert.com/PabaoSpring/scale_show&response_type=code&scope=snsapi_userinfo&state=liangbiao#wechat_redirect"
+             },
+              {
+                    "type": "view", 
+                    "name": "游戏评测", 
+                    "url": "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx00c60e99a8216c90&redirect_uri=http://weixin.falbert.com/Game/CrazyFinger.do&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect"
+             },
+             {
+                    "type": "view", 
+                    "name": "量表记录", 
+                    "url": "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx00c60e99a8216c90&redirect_uri=http://weixin.falbert.com/PabaoSpring/scale_record&response_type=code&scope=snsapi_userinfo&state=jilu#wechat_redirect"
+             },
+             {
+                    "type": "view", 
+                    "name": "量表得分折线图", 
+                    "url": "http://weixin.falbert.com/PabaoSpring/charts.html"
+             }
+            
+            ]
+         
+        }, 
+        {
+            "name": "互动", 
+            "sub_button": [
+            
+                {
+                    "type": "view", 
+                    "name": "我的主页", 
+                    "url": "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx00c60e99a8216c90&redirect_uri=http://weixin.falbert.com/PabaoSpring/show_homepage&response_type=code&scope=snsapi_userinfo&state=homepage#wechat_redirect"
+                },
+            
+   
+                {
+                    "type": "view", 
+                    "name": "消息盒子", 
+                    "url": "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx00c60e99a8216c90&redirect_uri=http://weixin.falbert.com/PabaoSpring/show_messagebox&response_type=code&scope=snsapi_userinfo&state=MessageBox#wechat_redirect"
+                },
+                
+                 {
+                    "type": "click", 
+                    "name": "使用帮助", 
+                    "key": "menu_3_3"
+                },
+                
+                 {
+                    "type": "view", 
+                    "name": "关于帕宝", 
+                    "url": "http://iip.nju.edu.cn/"
+                }
+            ]
+        }
+    ]
+}
