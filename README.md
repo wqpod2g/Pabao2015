@@ -10,6 +10,8 @@ Picture——图片保存模块
 ##
 JDK 1.8
 ##
+Tomcat 7.0
+##
 Hibernate 3.6.4
 ##
 Spring 3.2.9
