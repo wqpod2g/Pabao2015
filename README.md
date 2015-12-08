@@ -7,6 +7,7 @@ PabaoSpring——主模块
 Picture——图片保存模块
 
 #开发环境及框架
+Mysql 5.5 (共12张表，已导入Pabao2015.sql文件中)
 ##
 JDK 1.8
 ##
