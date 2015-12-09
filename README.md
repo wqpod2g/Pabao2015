@@ -31,4 +31,6 @@ hibernate.cfg.xml——Hibernate主配置文件
 ##
 Menu——公众号菜单
 
+#公众号二维码
+<img src='http://files.cnblogs.com/files/mrpod2g/qrcode_for_gh_6a532081c36b_430.gif' width='85' />
 
