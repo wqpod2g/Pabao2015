@@ -1,19 +1,15 @@
 package nju.iip.controller;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import nju.iip.dao.LocationDao;
 import nju.iip.dao.UserDao;
-import nju.iip.dto.UserLocation;
 import nju.iip.dto.WeixinUser;
 import nju.iip.service.OAuthService;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,24 +37,15 @@ public class LocationController {
 		OAuthService.getUerInfo(request);// 获取用户信息
 		WeixinUser snsUserInfo = (WeixinUser)request.getSession().getAttribute("snsUserInfo");
 		String openId = snsUserInfo.getOpenId();
-		List<UserLocation> list = locationDao.getAllUserLocation();
+		List<HashMap<String,String>> list = locationDao.getAllUserLocation();
 		JSONObject outjson = new JSONObject();
-		JSONArray jsonArray = new JSONArray();
-		JSONObject center = null;
-		for(UserLocation location:list) {
-			WeixinUser user = userDao.getUser(location.getOpenId());
-			if(user==null) {
-				continue;
+		HashMap<String,String> center = null;
+		for(HashMap<String,String> location:list) {
+			if(location.get("openId").equals(openId)) {
+				center = location;
 			}
-			JSONObject json = JSONObject.fromObject(location);
-			json.put("nickname", user.getNickname());
-			json.put("headImgUrl",user.getHeadImgUrl());
-	        if(openId.equals(location.getOpenId())) {
-	        	center = json;
-			}
-			jsonArray.add(json);
 		}
-		outjson.put("location", jsonArray);
+		outjson.put("location", list);
 		outjson.put("center", center);
 		logger.info(outjson.toString());
 		request.setAttribute("location_json",outjson.toString());

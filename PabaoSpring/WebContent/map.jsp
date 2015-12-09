@@ -46,22 +46,24 @@ body,html,#allmap {
 						var init =<%=str%>;
 						var userOpenId = '<%=openId%>';
 						var center = init.center;
+						// 百度地图API功能
+						var map = new BMap.Map("allmap");
 						if(jQuery.isEmptyObject(center)) {
 							alert("您未提供位置信息！要查看附近的人请返回点击公众号右上角->提供位置信息");
 						}
 						else {
 							
-						// 百度地图API功能
-						var map = new BMap.Map("allmap");
+						
 						map.centerAndZoom(new BMap.Point(
-								center.longitude,
-								center.latitude), 11);
+								center.Longitude,
+								center.Latitude), 11);
+						}
 						map.addControl(new BMap.ZoomControl()); //添加地图缩放控件
 
 						//var Point = [], marker = [], infoWindow = [];
 						//var i = 0;
 
-						for (i = 0; i < init.location.length; i++) {
+						for (var i = 0; i < init.location.length; i++) {
 							var headImgUrl = init.location[i].headImgUrl;
 							var nickname = init.location[i].nickname;
 							var openId = init.location[i].openId;
@@ -76,8 +78,8 @@ body,html,#allmap {
 									url = '<a href="MyHomePage.jsp';
 								}
 								var Point = new BMap.Point(
-										init.location[i].longitude,
-										init.location[i].latitude);
+										init.location[i].Longitude,
+										init.location[i].Latitude);
 								var marker = new BMap.Marker(Point);
 								var opts = {
 									width : 100, // 信息窗口宽度
@@ -102,7 +104,6 @@ body,html,#allmap {
 								map.addOverlay(marker);
 								})(i);
 							}
-						}
 					});
 </script>
 </html>
