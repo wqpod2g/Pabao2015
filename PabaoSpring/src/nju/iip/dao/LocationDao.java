@@ -9,7 +9,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+
 import nju.iip.dto.UserLocation;
+
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.slf4j.Logger;
@@ -97,8 +99,31 @@ public class LocationDao extends DAO {
 			}
 		}catch (SQLException e) {
 			logger.info("LocationDao-->getAllUserLocation",e);
+		}finally {
+			closeDB();
 		}
 		return list;
+	}
+	
+	/**
+	 * 关闭数据库
+	 */
+	public void closeDB() {
+		if (rs != null) {
+			try {
+				rs.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		if (ps != null) {
+			try {
+				ps.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		ConnectionPool.getInstance().releaseConnection(conn);
 	}
 	
 	public static void main(String[] args) {
