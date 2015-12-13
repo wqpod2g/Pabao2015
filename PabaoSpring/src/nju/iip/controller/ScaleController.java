@@ -55,7 +55,7 @@ public class ScaleController {
 		String jsonStr = null;
 		Jedis jedis = JedisPoolUtils.getInstance().getJedis();//jedis实例
 		//判断该量表是否已经缓存
-		if((jsonStr=jedis.get("scale"+totalScaleId))!=null) {
+		if(jedis!=null&&(jsonStr=jedis.get("scale"+totalScaleId))!=null) {
 			logger.info(totalScaleId+scale.getScaleName()+"量表已经存于redis缓存中");
 		}
 		else{
@@ -64,10 +64,15 @@ public class ScaleController {
 			List<Questions> list = ScaleDao.getQuestions(ScaleDao.getQuestionId(Integer.valueOf(totalScaleId)));
 			json.put("questions", list);
 			jsonStr = json.toString();// 量表对应所有题目的json字符串
-			jedis.set("scale"+totalScaleId, jsonStr);//缓存该量表
-			logger.info("缓存"+totalScaleId+scale.getScaleName()+"量表成功");
+			if(jedis!=null) {
+				jedis.set("scale"+totalScaleId, jsonStr);//缓存该量表
+				logger.info("缓存"+totalScaleId+scale.getScaleName()+"量表成功");
+				JedisPoolUtils.getInstance().returnRes(jedis);//释放redis连接
+			}
+			else {
+				logger.info("redis is not running...please turn it on...");
+			}
 		}
-		JedisPoolUtils.getInstance().returnRes(jedis);//释放redis连接
 		request.setAttribute("questions", jsonStr);
 		request.getSession().setAttribute("scale", scale);
 		return "scale.jsp";

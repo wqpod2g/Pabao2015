@@ -31,7 +31,8 @@ $(document)
 								success : function(msg) {
 									var obj = JSON.parse(msg); // 由JSON字符串转换为JSON对象
 									var data = obj.score;
-									$('#ranking table').html('');
+									 $('#ranking table').html('');
+										$('#beats').html("<font color='white' size='4'>当前排名:"+obj.rank+",击败了"+obj.beat+"的玩家!</font>");
 									for ( var i = 0; i < data.length; i++) {
 										$('#ranking table').append(
 												"<tr><td><img src='"

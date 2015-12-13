@@ -6,24 +6,19 @@ import java.net.URL;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
-
 import javax.servlet.http.HttpServletRequest;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import net.sf.json.JSONObject;
 import nju.iip.dao.UserDao;
 import nju.iip.dto.WeixinOauth2Token;
 import nju.iip.dto.WeixinUser;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class WeChatUtil {
 	private static String accessToken = null;
 	private static String jsapi_ticket = null;
-	private static final Logger logger = LoggerFactory
-			.getLogger(WeChatUtil.class);
-	
-	private static UserDao UD = new UserDao();
+	private static final Logger logger = LoggerFactory.getLogger(WeChatUtil.class);
+	private static UserDao userDao = new UserDao();
 
 	public static void getUserInfo(HttpServletRequest request) {
 		// 用户同意授权后，能获取到code
@@ -53,12 +48,12 @@ public class WeChatUtil {
 				request.getSession().setAttribute("snsUserInfo", snsUserInfo);
 
 				// 检查用户是否已绑定
-				flag = UD.checkBind(openId);
+				flag = userDao.checkBind(openId);
 				if (!flag) {
 					logger.info("欢迎来自" + snsUserInfo.getProvince() + " "
 							+ snsUserInfo.getCity() + "新用户:"
 							+ snsUserInfo.getNickname());
-					UD.addUserInfo(snsUserInfo);
+					userDao.addUserInfo(snsUserInfo);
 				}
 			} else {
 				logger.info("用户信息已经存在session中"+"欢迎来自" + snsUserInfo.getProvince() + " "

@@ -17,14 +17,14 @@
     <button id="button1" class="button red" style="margin-top: 30px;width: 160px;height:160px;border-radius:80px;font-size:18px;font-weight:bold;">left</button>
     <button id="button2" class="button red" style="margin-top: 30px;width: 160px;height:160px;border-radius:80px;font-size:18px;font-weight:bold;">right</button>
     <div style="margin:20px;text-align:center;margin-bottom:0">
-        <div id="result" style="color:#fff;font-size:30px;">0 次</div>
+        <div id="result" style="color:#fff;font-size:30px;"><table width="160px"><tr><td id="result_left">0次</td><td id="result_right">0次</td></tr></table></div>
         <div id="best" style="margin-top:10px;color:#fff;font-size:20px;"> </div>
     </div>
 </div>
 
 <div id="result_panel" style="display:none;text-align:center;padding-top:20px;position:absolute;top:0;right:0;bottom:0;left:0;background-color:rgba(0,0,0,0.8)">
             <div><button id="reset" style="font-size:25px">再玩一次</button></div>
-   
+            <div style='text-align:center,width:100%' id="beats"></div>
             <div id="ranking" style="display:block;padding:15px">
                <table>
                </table>

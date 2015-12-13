@@ -31,6 +31,7 @@
 		<div>
 			<button id="reset" style="font-size: 25px">再玩一次</button>
 		</div>
+		  <div style='text-align:center,width:100%' id="beats"></div>
 
 		<div id="ranking" style="display: block; padding: 15px">
 			<table>

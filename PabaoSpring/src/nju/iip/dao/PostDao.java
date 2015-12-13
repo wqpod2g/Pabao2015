@@ -109,7 +109,7 @@ public class PostDao extends DAO{
 			begin();
 			getSession().flush();
 			getSession().clear();
-			Query query = getSession().createQuery("from Comment where postId=:postId order by id desc");
+			Query query = getSession().createQuery("from Comment where postId=:postId order by id");
 			query.setInteger("postId", postId);
 			list = query.list();
 		}catch (HibernateException e) {

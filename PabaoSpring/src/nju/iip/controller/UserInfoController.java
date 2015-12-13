@@ -63,6 +63,7 @@ public class UserInfoController {
 	 */
 	@RequestMapping(value = "/show_homepage")
 	public String showHomePage(HttpServletRequest request) {
+		logger.info("showHomePage called");
 		OAuthService.getUerInfo(request);// 获取用户信息
 		WeixinUser snsUserInfo = (WeixinUser)request.getSession().getAttribute("snsUserInfo");
 		String openId = snsUserInfo.getOpenId();

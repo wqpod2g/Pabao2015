@@ -1,7 +1,6 @@
 ﻿<%@ page language="java" pageEncoding="utf-8"%>
 <%@ page import="java.util.List"%>
 <%@ page import="nju.iip.dto.Post"%>
-<%@ page import="nju.iip.dao.PostDao"%>
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -11,7 +10,8 @@
 	content="width=device-width,height=device-height,inital-scale=1.0,maximum-scale=1.0,user-scalable=no;">
 <title>微社区</title>
 <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
-<link rel="stylesheet" href="css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="http://cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css">
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="css/base.css">
@@ -21,19 +21,10 @@
 	<div id="contain">
 
 		<%
-			PostDao PD = new PostDao();
-			    List<Post> upPost_list = PD.getAllUpPost();
-				List<Post> post_list = PD.getAllPostLimit(0);
-				upPost_list.addAll(post_list);
-				for (Post post:upPost_list) {
-					String content = post.getContent();
-					String title = post.getTitle();
-					if(title.length()>15) {
-						title = title.substring(0,15)+"...";
-					}
-					if(content.length()>36) {
-						content = content.substring(0,36)+"...";
-					}
+			List<Post> post_list = (List<Post>) request.getAttribute("post_list");
+			for (Post post : post_list) {
+				String content = post.getContent();
+				String title = post.getTitle();
 		%>
 		<div class="bgfff form ov" id=<%=post.getId()%>>
 			<div class="fb">
@@ -42,7 +33,7 @@
 			<hr style="border: 0; height: 0.1px;" />
 			<div>
 				<%
-					if(post.getPictureUrl()!=null) {
+					if (post.getPictureUrl() != null) {
 				%>
 				<span class="glyphicon glyphicon-picture" aria-hidden="true"></span>
 				<%

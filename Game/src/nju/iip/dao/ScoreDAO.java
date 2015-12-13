@@ -3,11 +3,15 @@ package nju.iip.dao;
 import java.util.List;
 
 import nju.iip.dto.GameScore;
+import nju.iip.redis.JedisPoolUtils;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Service;
+import redis.clients.jedis.Jedis;
 
+@Service
 public class ScoreDAO extends DAO{
 	
 	private static final Logger logger = LoggerFactory.getLogger(ScoreDAO.class);
@@ -49,7 +53,7 @@ public class ScoreDAO extends DAO{
     		return true;
 		}catch (HibernateException e) {
 			rollback();
-			logger.info("ScoreDAO-->updateScore",e);
+			logger.info("ScoreDAO-->addScore",e);
 		}
 		return false;
 	}
@@ -107,6 +111,13 @@ public class ScoreDAO extends DAO{
 	}
 	
 	public static void main(String[] args) {
-		
+		ScoreDAO sd = new ScoreDAO();
+		Jedis jedis = JedisPoolUtils.getInstance().getJedis();//jedis实例
+		logger.info(jedis.ping());
+		List<GameScore> list = sd.getAllScore("CrazyFinger2");
+		for(GameScore gamescore:list) {
+			jedis.zadd(gamescore.getGame(), gamescore.getScore(),gamescore.getOpenId());
+		}
+		JedisPoolUtils.getInstance().returnRes(jedis);//释放redis连接
 	}
 }

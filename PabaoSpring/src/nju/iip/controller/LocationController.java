@@ -7,7 +7,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import net.sf.json.JSONObject;
 import nju.iip.dao.LocationDao;
-import nju.iip.dao.UserDao;
 import nju.iip.dto.WeixinUser;
 import nju.iip.service.OAuthService;
 import org.slf4j.Logger;
@@ -27,9 +26,6 @@ public class LocationController {
 	
 	@Autowired
 	private LocationDao locationDao;
-	
-	@Autowired
-	private UserDao userDao;
 	
 	@RequestMapping(value = "/nearby_show")
 	public String showNearby(HttpServletRequest request,HttpServletResponse response) throws IOException {

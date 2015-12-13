@@ -39,6 +39,8 @@ public class PostController {
 	public String showPostList(HttpServletRequest request) {
 		logger.info("showPostList called");
 		OAuthService.getUerInfo(request);// 获取用户信息
+		List<Post> post_list = postdao.getAllPostLimit(0);
+		request.setAttribute("post_list", post_list);
 		return "post_list.jsp";
 	}
 

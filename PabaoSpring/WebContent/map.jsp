@@ -11,11 +11,9 @@ body,html,#allmap {
 	overflow: hidden;
 	margin: 0;
 }
-
 #golist {
 	display: none;
 }
-
 @media ( max-device-width : 780px) {
 	#golist {
 		display: block !important;
@@ -24,8 +22,6 @@ body,html,#allmap {
 </style>
 <link rel="stylesheet"
 	href="http://cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css">
-<link rel="stylesheet" href="css/base.css">
-<link rel="stylesheet" href="css/common.css">
 <title>查看附近的人</title>
 
 <%
@@ -75,7 +71,7 @@ body,html,#allmap {
 									url = '<a href="HomePage.jsp?openId='+openId;
 								}
 								else {
-									url = '<a href="MyHomePage.jsp';
+									url = '<a href="show_homepage';
 								}
 								var Point = new BMap.Point(
 										init.location[i].Longitude,

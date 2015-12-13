@@ -2,6 +2,7 @@ package nju.iip.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.DecimalFormat;
 import java.util.List;
 import java.util.Random;
 
@@ -12,6 +13,7 @@ import net.sf.json.JSONObject;
 import nju.iip.dao.ScoreDAO;
 import nju.iip.dto.GameScore;
 import nju.iip.dto.WeixinUser;
+import nju.iip.redis.JedisPoolUtils;
 import nju.iip.util.CommonUtil;
 import nju.iip.util.Config;
 import nju.iip.util.EmotionService;
@@ -19,9 +21,12 @@ import nju.iip.util.WeChatUtil;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import redis.clients.jedis.Jedis;
 
 @Controller
 public class GameController{
@@ -30,7 +35,8 @@ public class GameController{
 	private static final Logger logger = LoggerFactory
 			.getLogger(GameController.class);
 
-	
+	@Autowired
+	private ScoreDAO scoreDAO;
 
 	@RequestMapping(value = "/CrazyFinger.do")
 	public String CrazyFinger(HttpServletRequest request, Model model) {
@@ -98,17 +104,29 @@ public class GameController{
 		gs.setNickname(name);
 		gs.setHeadImgUrl(user.getHeadImgUrl());
 		gs.setOpenId(openId);
-		ScoreDAO scoreDAO = new ScoreDAO();
-		if (!scoreDAO.checkIsExist(openId, gs.getGame())) {
-			scoreDAO.addScore(gs);
+		Jedis jedis = JedisPoolUtils.getInstance().getJedis();//jedis实例
+		Double oldScore = null; //旧的分数
+		if ((oldScore = jedis.zscore(gs.getGame(), openId)) == null) {
+			if(!scoreDAO.checkIsExist(openId,gs.getGame())) {
+				scoreDAO.addScore(gs);
+			}
+			jedis.zadd(gs.getGame(), gs.getScore(),gs.getOpenId());
+			logger.info("新用户"+name+"分数"+gs.getScore()+"缓存redis成功");
 		} else {
-			if (gs.getScore() > scoreDAO.getScore(openId, gs.getGame())) {
+			if (gs.getScore() > oldScore) {
 				logger.info(name + "分数增加为" + gs.getScore());
 				scoreDAO.updateScore(gs);
+				jedis.zadd(gs.getGame(), gs.getScore(),gs.getOpenId());
 			}
 		}
+		Long rank = jedis.zrank(gs.getGame(), gs.getOpenId());//当前用户排名
+		Long sum = jedis.zcard(gs.getGame());
+		JedisPoolUtils.getInstance().returnRes(jedis);
 		List<GameScore> list = scoreDAO.getAllScore(gs.getGame());
 		JSONObject json = new JSONObject();
+		DecimalFormat df1 = new DecimalFormat("0.0"); 
+		json.put("rank", sum-rank);
+		json.put("beat", df1.format(100.0*(rank)/(sum))+"%");
 		json.put("score", list);
 		logger.info("json=" + json.toString());
 		PrintWriter pw = response.getWriter();
