@@ -7,13 +7,13 @@
              {
                     "type": "view", 
                     "name": "微社区", 
-                    "url": "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx00c60e99a8216c90&redirect_uri=http://weixin.falbert.com/PabaoSpring/post_list&response_type=code&scope=snsapi_userinfo&state=bbs#wechat_redirect"
+                    "url": "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx00c60e99a8216c90&redirect_uri=http://www.mrpod2g.cn/PabaoSpring/post_list&response_type=code&scope=snsapi_userinfo&state=bbs#wechat_redirect"
               },
               
               {
                     "type": "view", 
                     "name": "附近的人", 
-                    "url": "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx00c60e99a8216c90&redirect_uri=http://weixin.falbert.com/PabaoSpring/nearby_show&response_type=code&scope=snsapi_userinfo&state=nearby#wechat_redirect"
+                    "url": "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx00c60e99a8216c90&redirect_uri=http://www.mrpod2g.cn/PabaoSpring/nearby_show&response_type=code&scope=snsapi_userinfo&state=nearby#wechat_redirect"
               },
               
               {
@@ -33,22 +33,22 @@
              {
                     "type": "view", 
                     "name": "量表评测", 
-                    "url": "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx00c60e99a8216c90&redirect_uri=http://weixin.falbert.com/PabaoSpring/scale_show&response_type=code&scope=snsapi_userinfo&state=liangbiao#wechat_redirect"
+                    "url": "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx00c60e99a8216c90&redirect_uri=http://www.mrpod2g.cn/PabaoSpring/scale_show&response_type=code&scope=snsapi_userinfo&state=liangbiao#wechat_redirect"
              },
               {
                     "type": "view", 
                     "name": "游戏评测", 
-                    "url": "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx00c60e99a8216c90&redirect_uri=http://weixin.falbert.com/Game/CrazyFinger.do&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect"
+                    "url": "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx00c60e99a8216c90&redirect_uri=http://www.mrpod2g.cn/Game/CrazyFinger.do&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect"
              },
              {
                     "type": "view", 
                     "name": "量表记录", 
-                    "url": "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx00c60e99a8216c90&redirect_uri=http://weixin.falbert.com/PabaoSpring/scale_record&response_type=code&scope=snsapi_userinfo&state=jilu#wechat_redirect"
+                    "url": "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx00c60e99a8216c90&redirect_uri=http://www.mrpod2g.cn/PabaoSpring/scale_record&response_type=code&scope=snsapi_userinfo&state=jilu#wechat_redirect"
              },
              {
                     "type": "view", 
                     "name": "量表得分折线图", 
-                    "url": "http://weixin.falbert.com/PabaoSpring/charts.html"
+                    "url": "http://www.mrpod2g.cn/PabaoSpring/charts.html"
              }
             
             ]
@@ -61,14 +61,14 @@
                 {
                     "type": "view", 
                     "name": "我的主页", 
-                    "url": "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx00c60e99a8216c90&redirect_uri=http://weixin.falbert.com/PabaoSpring/show_homepage&response_type=code&scope=snsapi_userinfo&state=homepage#wechat_redirect"
+                    "url": "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx00c60e99a8216c90&redirect_uri=http://www.mrpod2g.cn/PabaoSpring/show_homepage&response_type=code&scope=snsapi_userinfo&state=homepage#wechat_redirect"
                 },
             
    
                 {
                     "type": "view", 
                     "name": "消息盒子", 
-                    "url": "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx00c60e99a8216c90&redirect_uri=http://weixin.falbert.com/PabaoSpring/show_messagebox&response_type=code&scope=snsapi_userinfo&state=MessageBox#wechat_redirect"
+                    "url": "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx00c60e99a8216c90&redirect_uri=http://www.mrpod2g.cn/PabaoSpring/show_messagebox&response_type=code&scope=snsapi_userinfo&state=MessageBox#wechat_redirect"
                 },
                 
                  {
