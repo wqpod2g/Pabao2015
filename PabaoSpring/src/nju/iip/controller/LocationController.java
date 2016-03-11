@@ -1,14 +1,18 @@
 package nju.iip.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import net.sf.json.JSONObject;
 import nju.iip.dao.LocationDao;
 import nju.iip.dto.WeixinUser;
 import nju.iip.service.OAuthService;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,6 +50,16 @@ public class LocationController {
 		logger.info(outjson.toString());
 		request.setAttribute("location_json",outjson.toString());
 		return "map.jsp";
+	}
+	@RequestMapping(value = "/doNotSleep")
+	public void doNotSleep(HttpServletResponse response) throws IOException {
+		logger.info("doNotSleep called");
+		locationDao.getAllUserLocation();
+		logger.info(locationDao.isLocated("o9goJv-UC9zqM3TZ4Ya3Ie1jjZEs")+"");
+		PrintWriter out = response.getWriter();
+		out.print("doNotSleep ok");
+		out.flush();
+		out.close();
 	}
 	
 	public static void main(String[] args) {
